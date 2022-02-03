@@ -9,7 +9,7 @@ class Theme {
         primaryVariant: const Color(0x003700B3),
         secondary: Colors.teal[200],
         background: Colors.black,
-        surface: const Color(0x00121212),
+        surface: const Color.fromRGBO(24, 24, 24, 1),
         error: const Color(0x00CF6679),
         onPrimary: Colors.black,
         onSecondary: Colors.black,
@@ -27,10 +27,16 @@ class Theme {
         ),
         headline1: const TextStyle(
           color: Colors.white,
-          fontSize: 20,
+          fontSize: 30,
+          fontFamily: "Prompt",
+          fontWeight: FontWeight.w600,
         ),
         headline2: const TextStyle(
           color: Colors.grey,
+          fontSize: 15,
+        ),
+        headline3: const TextStyle(
+          color: Colors.white,
           fontSize: 15,
         ),
         subtitle1: const TextStyle(

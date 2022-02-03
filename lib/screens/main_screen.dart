@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spark/widgets/all_posts.dart';
+import 'package:spark/widgets/headline_card.dart';
 
 class MainScreen extends StatelessWidget {
   static const routeName = "/main";
@@ -6,10 +8,16 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.background,
-      child: const Center(
-        child: Text("Main Screen"),
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        color: Theme.of(context).colorScheme.background,
+        child: Column(
+          children: const [
+            HeadlineCard(),
+            Expanded(child: AllPosts()),
+          ],
+        ),
       ),
     );
   }

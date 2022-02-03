@@ -49,6 +49,21 @@ class Auth with ChangeNotifier {
     await prefs.setString('reddit_access_code', code);
   }
 
+  Future<void> tryAutoLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    accessToken = prefs.getString('reddit_access_code');
+    refreshToken = prefs.getString('reddit_refresh_token');
+    notifyListeners();
+  }
+
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    accessToken = null;
+    refreshToken = null;
+    await prefs.clear();
+    notifyListeners();
+  }
+
   String getRedditBasicAuthHeader() {
     var basicAuthStr = "${dotenv.env['CLIENT_ID']}:";
     var bytes = utf8.encode(basicAuthStr);

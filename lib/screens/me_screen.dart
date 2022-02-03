@@ -16,11 +16,28 @@ class MeScreen extends StatefulWidget {
 class _MeScreenState extends State<MeScreen> {
   @override
   Widget build(BuildContext context) {
-    final _auth = Provider.of<Auth>(context);
-    return Container(
-      color: Theme.of(context).colorScheme.background,
-      child: Center(
-        child: _auth.isLoggedIn ? const Text("Me") : Login(widget._controller),
+    return FutureBuilder(
+      future: Provider.of<Auth>(context, listen: false).tryAutoLogin(),
+      builder: (ctx, snapshot) => Container(
+        color: Theme.of(context).colorScheme.background,
+        child: Center(
+          child: Consumer<Auth>(
+            builder: (ctx, authData, _) => authData.isLoggedIn
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Me"),
+                      ElevatedButton(
+                        onPressed: () async {
+                          authData.logout();
+                        },
+                        child: const Text("Logout"),
+                      )
+                    ],
+                  )
+                : Login(widget._controller),
+          ),
+        ),
       ),
     );
   }

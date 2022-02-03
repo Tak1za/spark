@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  final PersistentTabController _controller;
+  const Login(this._controller, {Key? key}) : super(key: key);
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,11 +48,7 @@ class Login extends StatelessWidget {
                 await launch(authorizationUrl.toString());
               }
             },
-            child: Text(
-              "Login using Reddit",
-              style:
-                  TextStyle(color: Theme.of(context).colorScheme.onBackground),
-            ),
+            child: const Text("Login using Reddit"),
           ),
           const SizedBox(
             height: 10,
@@ -57,9 +60,13 @@ class Login extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            "Continue browsing anonymously",
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                widget._controller.jumpToTab(0);
+              });
+            },
+            child: const Text("Continue browsing anonymously"),
           ),
         ],
       ),

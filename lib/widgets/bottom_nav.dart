@@ -9,15 +9,14 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller;
-
-    _controller = PersistentTabController(initialIndex: 1);
+    PersistentTabController _controller =
+        PersistentTabController(initialIndex: 1);
 
     List<Widget> _buildScreens() {
-      return const [
-        MainScreen(),
-        MeScreen(),
-        SettingsScreen(),
+      return [
+        const MainScreen(),
+        MeScreen(_controller),
+        const SettingsScreen(),
       ];
     }
 

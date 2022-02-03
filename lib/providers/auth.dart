@@ -15,6 +15,10 @@ class Auth with ChangeNotifier {
     return accessToken;
   }
 
+  bool get isLoggedIn {
+    return token != null;
+  }
+
   String extractAuthorisationCodeFromQuery(String query) {
     List<String> queryList = query.split('&');
 

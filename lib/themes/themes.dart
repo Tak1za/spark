@@ -8,7 +8,7 @@ class Theme {
         primary: Colors.deepPurple[200],
         primaryVariant: const Color(0x003700B3),
         secondary: Colors.teal[200],
-        background: const Color(0x00121212),
+        background: Colors.black,
         surface: const Color(0x00121212),
         error: const Color(0x00CF6679),
         onPrimary: Colors.black,
@@ -21,13 +21,17 @@ class Theme {
       splashColor: Colors.deepPurple[200],
       textTheme: TextTheme(
         button: const TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
           fontSize: 15,
         ),
         headline1: const TextStyle(
           color: Colors.white,
           fontSize: 20,
+        ),
+        headline2: const TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
         ),
         subtitle1: const TextStyle(
           fontSize: 15,

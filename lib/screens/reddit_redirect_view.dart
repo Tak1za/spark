@@ -16,19 +16,17 @@ class _RedditRedirectViewState extends State<RedditRedirectView> {
     final auth = Provider.of<Auth>(context, listen: false);
     String code = auth.extractAuthorisationCodeFromQuery(widget.query);
 
-    return Scaffold(
-      body: FutureBuilder(
+    return Center(
+      child: FutureBuilder(
         future: auth
             .setRedditAuthorisationCode(code)
-            .then((_) => auth.setRedditAccessTokenFromCode(code)),
+            .then((_) => auth.setRedditAccessTokenFromCode(code))
+            .then(
+              (_) => Navigator.of(context).pushReplacementNamed('/'),
+            ),
         builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
           return const Center(
-            child: Text('All Done'),
+            child: CircularProgressIndicator(),
           );
         },
       ),

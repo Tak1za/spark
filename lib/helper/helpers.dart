@@ -5,7 +5,8 @@ import 'package:spark/models/post.dart';
 
 class Helpers {
   static Future<List<Post>> fetchListingsOfType(String type) async {
-    final url = Uri.parse("https://www.reddit.com/${type.toLowerCase()}.json");
+    final url = Uri.parse(
+        "https://www.reddit.com/${type.toLowerCase()}.json?raw_json=1");
     final response = await get(url);
     final parsedResponse = jsonDecode(response.body);
     List<Post> posts = [];

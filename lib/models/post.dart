@@ -8,6 +8,7 @@ class Post {
   final int numberOfComments;
   final String createdAt;
   final String? thumbnail;
+  final String? previewSource;
 
   Post({
     required this.title,
@@ -17,6 +18,7 @@ class Post {
     required this.numberOfComments,
     required this.createdAt,
     this.thumbnail,
+    this.previewSource,
   });
 
   factory Post.fromJson(Map<String, dynamic> data) {
@@ -31,12 +33,17 @@ class Post {
     final timeDifference = DateTime.now().difference(createdAtUTC);
     final createdAtAgo = DateTime.now().subtract(timeDifference);
     final createdAt = timeago.format(createdAtAgo, locale: 'en_short');
-    final thumbnail = data['data']['thumbnail_width'] == null ||
-            data['data']['thumbnail'] == "default" ||
-            data['data']['thumbnail'] == "nsfw" ||
-            data['data']['thumbnail'] == "self"
+    final mediaNotPresent = data['data']['thumbnail_width'] == null ||
+        data['data']['thumbnail'] == "default" ||
+        data['data']['thumbnail'] == "nsfw" ||
+        data['data']['thumbnail'] == "self" ||
+        data['data']['thumbnail'] == "spoiler" ||
+        data['data']['thumbnail'] == "image";
+    final thumbnail = mediaNotPresent ? null : data['data']['thumbnail'];
+    final previewNotPresent = data['data']['preview'] == null;
+    final previewSource = previewNotPresent
         ? null
-        : data['data']['thumbnail'];
+        : data['data']['preview']['images'][0]['source']['url'];
     return Post(
       title: title,
       subreddit: subreddit,
@@ -45,6 +52,7 @@ class Post {
       numberOfComments: numberOfComments,
       createdAt: createdAt,
       thumbnail: thumbnail,
+      previewSource: previewSource,
     );
   }
 }

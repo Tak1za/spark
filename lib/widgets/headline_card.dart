@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:spark/widgets/floating_modal.dart';
 
 class HeadlineCard extends StatefulWidget {
   const HeadlineCard({Key? key}) : super(key: key);
@@ -9,7 +11,15 @@ class HeadlineCard extends StatefulWidget {
 }
 
 class _HeadlineCardState extends State<HeadlineCard> {
-  String? dropdownValue = "Best";
+  List<String> listingTypes = [
+    "Best",
+    "Controversial",
+    "Hot",
+    "New",
+    "Random",
+    "Rising",
+    "Top",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +51,25 @@ class _HeadlineCardState extends State<HeadlineCard> {
               ),
               IconButton(
                 icon: const Icon(Icons.sort),
-                onPressed: () {},
+                onPressed: () async {
+                  await showFloatingModalBottomSheet(
+                    context: context,
+                    builder: (_) => Container(
+                      color: Theme.of(context).colorScheme.background,
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: ListView.separated(
+                        itemBuilder: (ctx, index) => ListTile(
+                          title: Text(
+                            listingTypes[index],
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        itemCount: 7,
+                        separatorBuilder: (ctx, index) => const Divider(),
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -49,4 +77,21 @@ class _HeadlineCardState extends State<HeadlineCard> {
       ),
     );
   }
+}
+
+Future<T> showFloatingModalBottomSheet<T>({
+  required BuildContext context,
+  required WidgetBuilder builder,
+}) async {
+  final result = await showCustomModalBottomSheet(
+    context: context,
+    builder: builder,
+    containerWidget: (_, animation, child) => FloatingModal(
+      child: child,
+    ),
+    expand: false,
+    enableDrag: false,
+  );
+
+  return result;
 }

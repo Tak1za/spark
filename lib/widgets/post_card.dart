@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spark/models/post.dart';
 
@@ -12,7 +13,7 @@ class PostCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${post.subreddit} - ${post.author}",
+          Text("${post.subreddit} • ${post.author} • ${post.createdAt}",
               style: Theme.of(context).textTheme.headline2),
           const SizedBox(
             height: 10,
@@ -29,7 +30,7 @@ class PostCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(Icons.chat_bubble_outline),
+                  const Icon(CupertinoIcons.chat_bubble),
                   const SizedBox(
                     width: 5,
                   ),
@@ -37,7 +38,7 @@ class PostCard extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  const Icon(Icons.bookmark_add_outlined),
+                  const Icon(CupertinoIcons.bookmark),
                   const SizedBox(
                     width: 5,
                   ),
@@ -48,7 +49,7 @@ class PostCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(Icons.keyboard_arrow_up_rounded),
+                  const Icon(CupertinoIcons.arrow_down_circle),
                   const SizedBox(
                     width: 5,
                   ),
@@ -61,7 +62,7 @@ class PostCard extends StatelessWidget {
                   const SizedBox(
                     width: 5,
                   ),
-                  const Icon(Icons.keyboard_arrow_down_rounded),
+                  const Icon(CupertinoIcons.arrow_up_circle),
                 ],
               ),
             ],

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spark/models/post.dart';
+import 'package:spark/widgets/post_toolbar.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -22,51 +22,7 @@ class PostCard extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(CupertinoIcons.chat_bubble),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(post.numberOfComments.toString()),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Icon(CupertinoIcons.bookmark),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Text("Save"),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(CupertinoIcons.arrow_down_circle),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    post.upvotes.toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Icon(CupertinoIcons.arrow_up_circle),
-                ],
-              ),
-            ],
-          )
+          PostToolbar(post),
         ],
       ),
     );

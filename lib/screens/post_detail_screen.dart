@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spark/models/post.dart';
+import 'package:spark/providers/auth.dart';
 import 'package:spark/widgets/divider.dart' as divider;
 
 class PostDetailScreen extends StatelessWidget {
@@ -58,26 +60,28 @@ class PostDetailScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: const Icon(CupertinoIcons.arrow_down),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(CupertinoIcons.bookmark),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(CupertinoIcons.chat_bubble),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(CupertinoIcons.arrow_up),
-                      onPressed: () {},
-                    ),
-                  ],
+                Consumer<Auth>(
+                  builder: (ctx, auth, _) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(CupertinoIcons.arrow_down),
+                        onPressed: auth.isLoggedIn ? () {} : null,
+                      ),
+                      IconButton(
+                        icon: const Icon(CupertinoIcons.bookmark),
+                        onPressed: auth.isLoggedIn ? () {} : null,
+                      ),
+                      IconButton(
+                        icon: const Icon(CupertinoIcons.chat_bubble),
+                        onPressed: auth.isLoggedIn ? () {} : null,
+                      ),
+                      IconButton(
+                        icon: const Icon(CupertinoIcons.arrow_up),
+                        onPressed: auth.isLoggedIn ? () {} : null,
+                      ),
+                    ],
+                  ),
                 ),
                 const divider.Divider(),
                 const divider.Divider()

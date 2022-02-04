@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spark/models/post.dart';
+import 'package:spark/providers/auth.dart';
 
 class Votes extends StatelessWidget {
   final Post post;
@@ -8,33 +10,35 @@ class Votes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(
-          CupertinoIcons.arrow_down_circle,
-          size: 20,
-          color: Theme.of(context).textTheme.headline2?.color,
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        Text(
-          post.upvotes.toString(),
-          style: Theme.of(context).textTheme.headline2?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        Icon(
-          CupertinoIcons.arrow_up_circle,
-          size: 20,
-          color: Theme.of(context).textTheme.headline2?.color,
-        ),
-      ],
+    return Consumer<Auth>(
+      builder: (ctx, auth, _) => Row(
+        children: [
+          IconButton(
+            onPressed: auth.isLoggedIn ? () {} : null,
+            icon: const Icon(
+              CupertinoIcons.arrow_down,
+              size: 20,
+            ),
+          ),
+          Text(
+            post.upvotes.toString(),
+            style: auth.isLoggedIn
+                ? Theme.of(context).textTheme.headline3?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )
+                : Theme.of(context).textTheme.headline2?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+          ),
+          IconButton(
+            onPressed: auth.isLoggedIn ? () {} : null,
+            icon: const Icon(
+              CupertinoIcons.arrow_up,
+              size: 20,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

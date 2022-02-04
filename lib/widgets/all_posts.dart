@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:spark/helper/helpers.dart';
 import 'package:spark/models/post.dart';
@@ -25,10 +26,17 @@ class AllPosts extends StatelessWidget {
           child: ListView.separated(
             itemBuilder: (ctx, index) => PostCard(data[index]),
             itemCount: data.length,
-            separatorBuilder: (ctx, index) => const Divider(
-              thickness: 2,
-              indent: 10,
-              endIndent: 10,
+            separatorBuilder: (ctx, index) => Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: DottedLine(
+                direction: Axis.horizontal,
+                lineThickness: 1,
+                lineLength: MediaQuery.of(context).size.width / 1.2,
+                dashLength: 2,
+                dashGapLength: 2,
+                dashColor: Colors.grey[700]!,
+              ),
             ),
           ),
         );

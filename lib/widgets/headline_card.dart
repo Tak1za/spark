@@ -39,7 +39,10 @@ class _HeadlineCardState extends State<HeadlineCard> {
                 'Best',
                 style: Theme.of(context).textTheme.headline1,
               ),
-              const Icon(Icons.sort),
+              IconButton(
+                icon: const Icon(Icons.sort),
+                onPressed: () {},
+              ),
             ],
           ),
         ],

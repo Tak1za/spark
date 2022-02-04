@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:spark/models/post.dart';
 
 class Votes extends StatelessWidget {
@@ -11,20 +12,28 @@ class Votes extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Icon(CupertinoIcons.arrow_down_circle),
+        Icon(
+          CupertinoIcons.arrow_down_circle,
+          size: 20,
+          color: Theme.of(context).textTheme.headline2?.color,
+        ),
         const SizedBox(
           width: 5,
         ),
         Text(
           post.upvotes.toString(),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headline2?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(
           width: 5,
         ),
-        const Icon(CupertinoIcons.arrow_up_circle),
+        Icon(
+          CupertinoIcons.arrow_up_circle,
+          size: 20,
+          color: Theme.of(context).textTheme.headline2?.color,
+        ),
       ],
     );
   }

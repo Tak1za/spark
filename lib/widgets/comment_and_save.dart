@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:spark/models/post.dart';
 
 class CommentAndSave extends StatelessWidget {
@@ -15,11 +16,18 @@ class CommentAndSave extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(CupertinoIcons.chat_bubble),
+            Icon(
+              CupertinoIcons.chat_bubble,
+              size: 20,
+              color: Theme.of(context).textTheme.headline2?.color,
+            ),
             const SizedBox(
               width: 5,
             ),
-            Text(post.numberOfComments.toString()),
+            Text(
+              post.numberOfComments.toString(),
+              style: Theme.of(context).textTheme.headline2,
+            ),
           ],
         ),
         const SizedBox(
@@ -28,12 +36,19 @@ class CommentAndSave extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Icon(CupertinoIcons.bookmark),
-            SizedBox(
+          children: [
+            Icon(
+              CupertinoIcons.bookmark,
+              size: 20,
+              color: Theme.of(context).textTheme.headline2?.color,
+            ),
+            const SizedBox(
               width: 5,
             ),
-            Text("Save"),
+            Text(
+              "Save",
+              style: Theme.of(context).textTheme.headline2,
+            ),
           ],
         ),
       ],

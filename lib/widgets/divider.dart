@@ -2,7 +2,10 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
 class Divider extends StatelessWidget {
-  const Divider({Key? key}) : super(key: key);
+  final double length;
+
+  // ignore: use_key_in_widget_constructors
+  const Divider([this.length = double.infinity]);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class Divider extends StatelessWidget {
       child: DottedLine(
         direction: Axis.horizontal,
         lineThickness: 1,
-        lineLength: MediaQuery.of(context).size.width / 1.2,
+        lineLength: length,
         dashLength: 2,
         dashGapLength: 4,
         dashColor: Colors.grey[700]!,

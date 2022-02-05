@@ -88,7 +88,6 @@ class PostDetailScreen extends StatelessWidget {
                   ),
                 ),
                 const divider.Divider(),
-                const divider.Divider()
               ],
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:spark/models/post.dart';
 import 'package:spark/providers/auth.dart';
 import 'package:spark/widgets/divider.dart' as divider;
+import 'package:url_launcher/url_launcher.dart';
 
 class PostDetailScreen extends StatelessWidget {
   final Post post;
@@ -54,6 +55,30 @@ class PostDetailScreen extends StatelessWidget {
                           post.selftext!,
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
+                      )
+                    : Container(),
+                post.externalLink != null
+                    ? InkWell(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          alignment: Alignment.topLeft,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(post.externalLink!),
+                              ),
+                              const Icon(CupertinoIcons.chevron_right)
+                            ],
+                          ),
+                        ),
+                        onTap: () => launch(post.externalLink!),
+                        splashColor: Theme.of(context).colorScheme.surface,
                       )
                     : Container(),
                 Container(

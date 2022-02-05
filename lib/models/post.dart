@@ -12,6 +12,7 @@ class Post {
   final String? selftext;
   final String? thumbnail;
   final String? previewSource;
+  final String? externalLink;
 
   Post({
     required this.title,
@@ -23,6 +24,7 @@ class Post {
     this.selftext,
     this.thumbnail,
     this.previewSource,
+    this.externalLink,
   });
 
   factory Post.fromJson(Map<String, dynamic> data) {
@@ -63,6 +65,10 @@ class Post {
     final previewSource = previewNotPresent
         ? null
         : data['data']['preview']['images'][0]['source']['url'];
+    final isLink = data['data']['post_hint'] != null
+        ? data['data']['post_hint'] as String == "link"
+        : false;
+    final externalLink = isLink ? data['data']['url'] : null;
     return Post(
       title: title,
       subreddit: subreddit,
@@ -73,6 +79,7 @@ class Post {
       selftext: selftext,
       thumbnail: thumbnail,
       previewSource: previewSource,
+      externalLink: externalLink,
     );
   }
 }

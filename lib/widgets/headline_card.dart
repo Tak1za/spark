@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:spark/widgets/floating_modal.dart';
+import 'package:spark/widgets/listing_types.dart';
 
 class HeadlineCard extends StatefulWidget {
   const HeadlineCard({Key? key}) : super(key: key);
@@ -11,16 +12,6 @@ class HeadlineCard extends StatefulWidget {
 }
 
 class _HeadlineCardState extends State<HeadlineCard> {
-  List<String> listingTypes = [
-    "Best",
-    "Controversial",
-    "Hot",
-    "New",
-    "Random",
-    "Rising",
-    "Top",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,16 +48,7 @@ class _HeadlineCardState extends State<HeadlineCard> {
                     builder: (_) => Container(
                       color: Theme.of(context).colorScheme.background,
                       height: MediaQuery.of(context).size.height / 2,
-                      child: ListView.separated(
-                        itemBuilder: (ctx, index) => ListTile(
-                          title: Text(
-                            listingTypes[index],
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        itemCount: 7,
-                        separatorBuilder: (ctx, index) => const Divider(),
-                      ),
+                      child: const ListingTypes(),
                     ),
                   );
                 },

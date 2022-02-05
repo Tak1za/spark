@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spark/widgets/all_posts.dart';
+import 'package:provider/provider.dart';
+import 'package:spark/providers/listing_type.dart';
+import 'package:spark/widgets/post_list.dart';
 import 'package:spark/widgets/headline_card.dart';
 
 class MainScreen extends StatelessWidget {
@@ -12,11 +14,14 @@ class MainScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(5),
         color: Theme.of(context).colorScheme.background,
-        child: Column(
-          children: const [
-            HeadlineCard(),
-            Expanded(child: AllPosts()),
-          ],
+        child: ChangeNotifierProvider(
+          create: (ctx) => ListingType(),
+          child: Column(
+            children: const [
+              HeadlineCard(),
+              Expanded(child: PostList()),
+            ],
+          ),
         ),
       ),
     );

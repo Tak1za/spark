@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:spark/providers/listing_type.dart';
 import 'package:spark/widgets/divider.dart' as divider;
 
 class ListingTypes extends StatelessWidget {
@@ -26,16 +28,26 @@ class ListingTypes extends StatelessWidget {
       Icon(CupertinoIcons.arrow_up),
     ];
 
-    return ListView.separated(
-      itemBuilder: (ctx, index) => ListTile(
-        leading: listingIcons[index],
-        title: Text(
-          listingTypes[index],
-          style: const TextStyle(fontSize: 20),
+    return Consumer<ListingType>(
+      builder: (ctx, listing, _) => Container(
+        color: Theme.of(context).colorScheme.background,
+        height: MediaQuery.of(context).size.height / 2,
+        child: ListView.separated(
+          itemBuilder: (ctx, index) => ListTile(
+            leading: listingIcons[index],
+            title: Text(
+              listingTypes[index],
+              style: const TextStyle(fontSize: 20),
+            ),
+            onTap: () {
+              listing.setListingType(listingTypes[index]);
+              Navigator.of(context).pop();
+            },
+          ),
+          itemCount: 7,
+          separatorBuilder: (ctx, index) => const divider.Divider(),
         ),
       ),
-      itemCount: 7,
-      separatorBuilder: (ctx, index) => const divider.Divider(),
     );
   }
 }

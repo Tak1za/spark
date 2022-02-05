@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
+import 'package:spark/providers/listing_type.dart';
 import 'package:spark/widgets/floating_modal.dart';
 import 'package:spark/widgets/listing_types.dart';
 
-class HeadlineCard extends StatefulWidget {
+class HeadlineCard extends StatelessWidget {
   const HeadlineCard({Key? key}) : super(key: key);
 
-  @override
-  State<HeadlineCard> createState() => _HeadlineCardState();
-}
-
-class _HeadlineCardState extends State<HeadlineCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,28 +29,31 @@ class _HeadlineCardState extends State<HeadlineCard> {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Best',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              IconButton(
-                icon: const Icon(Icons.sort),
-                onPressed: () async {
-                  await showFloatingModalBottomSheet(
-                    context: context,
-                    builder: (_) => Container(
-                      color: Theme.of(context).colorScheme.background,
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: const ListingTypes(),
-                    ),
-                  );
-                },
-              ),
-            ],
+          Consumer<ListingType>(
+            builder: (ctx, listing, _) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  listing.listingType,
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.sort),
+                  onPressed: () async {
+                    await showFloatingModalBottomSheet(
+                      context: context,
+                      builder: (_) {
+                        return ListenableProvider.value(
+                          value: listing,
+                          child: const ListingTypes(),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

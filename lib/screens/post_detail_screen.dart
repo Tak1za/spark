@@ -30,6 +30,7 @@ class PostDetailScreen extends StatelessWidget {
                           color: Theme.of(context).colorScheme.surface,
                         ),
                         padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         child: Image.network(
                           post.previewSource!,
                           width: MediaQuery.of(context).size.width,
@@ -37,28 +38,31 @@ class PostDetailScreen extends StatelessWidget {
                         ),
                       )
                     : Container(),
-                const SizedBox(
-                  height: 10,
-                ),
-                Align(
+                Container(
                   alignment: Alignment.topLeft,
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    post.title,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ),
+                post.selftext != null
+                    ? Container(
+                        alignment: Alignment.topLeft,
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          post.selftext!,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      )
+                    : Container(),
+                Container(
+                  alignment: Alignment.topLeft,
+                  margin: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     "${post.subreddit} • ${post.author} • ${post.createdAt}",
                     style: Theme.of(context).textTheme.headline2,
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    post.title,
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 Consumer<Auth>(
                   builder: (ctx, auth, _) => Row(

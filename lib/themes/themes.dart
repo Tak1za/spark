@@ -39,6 +39,15 @@ class Theme {
           color: Colors.white,
           fontSize: 15,
         ),
+        headline4: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+        bodyText1: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
         subtitle1: const TextStyle(
           fontSize: 15,
           color: Colors.white,
